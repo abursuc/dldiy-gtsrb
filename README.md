@@ -37,7 +37,7 @@ The project is structured as following:
 ## Launching
 Experiments can be launched by calling `commander.py` and a set of input arguments to customize the experiments. You can find the list of available arguments in `args.py` and some default values. Note that not all parameters are mandatory for launching and most of them will be assigned their default value if the user does not modify them.
 
-Here are some typical launch commands and some comments:
+Here is a typical launch command and some comments:
 
 - `python commander.py --dataset gtsrb --name gtsrb_lenet_optsgd_lr1e-3_lrdecayPlateau0.5_bsz128 --batch-size 128 --optimizer sgd --scheduler ReduceLROnPlateau --lr 1e-3 --lr-decay 0.5 --step 15 --epochs 100 --arch lenet --model-name lenet5 --root-dir /data/ --num-classes 43 --workers 4 --crop-size 32 --criterion crossentropy --tensorboard`
   + this experiment is on the _gtsrb_ dataset which can be found in `--root-dir/gtsrb` trained with over _LeNet5_. It optimizes with sgd with initial learning rate (`--lr`) of `1e-3` which is decayed by half whenever the `--scheduler` _ReduceLRonPlateau_ does not see an improvement in the validation accuracy for more than `--step` epochs. Input images are of size 32  (`--crop-size`) In addition it saves intermediate results to `--tensorboard`.
