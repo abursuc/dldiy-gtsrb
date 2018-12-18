@@ -1,6 +1,6 @@
 # pytorch-gtsrb
 
-This is an illustrative example for a deep learning project in pytorch for the [DL-DIY course](https://www.di.ens.fr/~lelarge/dldiy/). We use the [German Traffic Sign Recognition Benchmark (GTSRB)](http://benchmark.ini.rub.de/?section=gtsrb&subsection=news) to show how could the code be structured for easier testing of new architectures and parameters, tracking of results and improving of the code.
+This is an illustrative example for a deep learning project in pytorch for the [DL-DIY course](https://www.di.ens.fr/~lelarge/dldiy/). We use the [German Traffic Sign Recognition Benchmark (GTSRB)](http://benchmark.ini.rub.de/?section=gtsrb&subsection=news) to show how could the code be structured for easier testing of new architectures and parameters, tracking of results and improving of the models.
 
 ## Data
 The original GTSRB datasets consists of large `.ppm` images of scenes with bounding box coordinates for the traffic signs. We use here a post-processed variant where signs have already been cropped out from their corresponding images and resized to 32 x 32. 
