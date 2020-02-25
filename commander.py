@@ -11,14 +11,12 @@ import torch
 
 from loaders import get_loader
 from models import get_model
-from toolbox import utils, logger, metrics, plotter, losses, optimizers
+from toolbox import utils, logger, metrics, losses, optimizers
 import trainer as trainer
 from args import parse_args
 
-try:
-    from tensorboardX import SummaryWriter
-except ImportError:
-    SummaryWriter = None
+from torch.utils.tensorboard import SummaryWriter
+
 
 
 '''
@@ -103,23 +101,6 @@ def load_checkpoint(args, model):
         return None
 
 
-
-def generate_plots(args, logger, confusion_mat=None, is_best=False, classnames=[]):
-    plotter.save_plot(args, logger,tags=['train', 'val'], name='loss', title='loss curves', labels=['train', 'val'] )
-    plotter.save_plot(args, logger,tags=['train', 'val'], name='acc1', title='accuracy (top1)', labels=['train', 'val'])
-    plotter.save_plot(args, logger,tags=['val'], name='mAP', title='Mean Average Precision', labels=['val mAP'])
-    plotter.save_plot(args, logger,tags=['val'], name='acc_class', title='Accuracy per class', labels=['val acc class'])
-    plotter.save_plot(args, logger,tags=['val'], name='meanIoU', title='meanIoU', labels=['val meanIoU'])
-    plotter.save_plot(args, logger,tags=['val'], name='fwavacc', title='fwavacc', labels=['val fwavacc'])
-    plotter.save_plot(args, logger,tags=['hyperparams'], name='learning_rate', title='Learning Rate', labels=['learning rate'])
-
-    if confusion_mat is not None:
-        out_fn = os.path.join(args.log_dir, 'pics', '{}_{}.png'.format(args.name, 'confusion_matrix'))
-        plotter.plot_confusion_matrix(confusion_mat, classnames=classnames,out_fn=out_fn)
-        plotter.save_as_best(is_best, out_fn)
-        plotter.save_as_best(is_best, out_fn=os.path.join(args.log_dir,'pics', '{}_watch_mosaic_pred_labels.jpg'.format(args.name)), extension='jpg')
-
-
 '''
                              o8o
                              `"'
@@ -132,7 +113,6 @@ o888o o888o o888o `Y888""8o o888o o888o o888o
 
 
 def main():
-
     global args, best_score, best_epoch
     best_score, best_epoch = -1, -1
     if len(sys.argv) > 1:
@@ -227,12 +207,6 @@ def main():
             'exp_logger': exp_logger,
             'res_list': res_list,
         }, is_best)
-
-        # write plots to disk
-        generate_plots(args, exp_logger, confusion_mat=exp_logger.meters['val']['confusion_matrix'].conf, is_best=is_best, classnames=val_loader.dataset.classnames)
-
-        # generate html report
-        logger.export_logs(args, epoch, best_epoch)
 
 
     if args.tensorboard:

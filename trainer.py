@@ -140,7 +140,7 @@ def validate(args, val_loader, model, criterion, logger, epoch, eval_score=None,
 
             # save samples from first mini-batch for qualitative visualization
             if i == 0:
-               utils.save_res_grid(input.detach().clone(), val_loader, pred, 
+               utils.save_res_grid(input.detach().to('cpu').clone(), val_loader, pred, 
                         target_class.to('cpu').clone(), 
                         out_fn=os.path.join(args.log_dir,'pics', '{}_watch_mosaic_pred_labels.jpg'.format(args.name)))
 
@@ -156,7 +156,7 @@ def validate(args, val_loader, model, criterion, logger, epoch, eval_score=None,
             if True == args.short_run:
                 if 12 == i:
                     print(' --- running in short-run mode: leaving epoch earlier ---')
-                    break    
+                    break
 
     
     acc, acc_cls, mean_iu, fwavacc = metrics.evaluate(hist)

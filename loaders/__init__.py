@@ -1,7 +1,4 @@
-import json
-
 from loaders.gtsrb_loader import GTSRBLoader
-
 
 def get_loader(args):
     """get_loader

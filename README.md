@@ -1,6 +1,6 @@
 # pytorch-gtsrb
 
-This is an illustrative example for a deep learning project in pytorch for the [DL-DIY course](https://www.di.ens.fr/~lelarge/dldiy/). We use the [German Traffic Sign Recognition Benchmark (GTSRB)](http://benchmark.ini.rub.de/?section=gtsrb&subsection=news) to show how could the code be structured for easier testing of new architectures and parameters, tracking of results and improving of the models.
+This is an illustrative example for a deep learning project in pytorch for the [DL-DIY course](https://mlelarge.github.io/dataflowr-web/dldiy.html). We use the [German Traffic Sign Recognition Benchmark (GTSRB)](http://benchmark.ini.rub.de/?section=gtsrb&subsection=news) to show how could the code be structured for easier testing of new architectures and parameters, tracking of results and improving of the models.
 
 ## Data
 The original GTSRB datasets consists of large `.ppm` images of scenes with bounding box coordinates for the traffic signs. We use here a post-processed variant where signs have already been cropped out from their corresponding images and resized to 32 x 32. 
@@ -56,8 +56,6 @@ For each experiment a folder with the same name is created in the folder `root-d
 ├── best model (\*.pth.tar) # the currently best model for the experiment is saved separately
 ├── config.json  # experiment hyperparameters
 ├── logger.json  # scores and metrics from all training epochs (loss, learning rate, accuracy,etc.)
-├── report.html  # html page displaying most useful metrics for the experiment (loss, learning rate, accuracy, confusion matrix, qualitative examples)
-    └── pics # plots displayed in the html report
 ├── res  # predictions for each sample from the validation set for every epoch
 ├── tensorboard  # experiment values saved in tensorboard format
  ```
@@ -68,5 +66,4 @@ If you have performed multiple experiments, tensorboard will aggregate them in t
   
   
  ## Dependencies
- - [tensorboardX](https://github.com/lanpa/tensorboardX)
  - [imageio](http://imageio.github.io/)
